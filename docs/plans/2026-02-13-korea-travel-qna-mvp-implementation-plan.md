@@ -23,8 +23,8 @@
 **Step 1: Install required packages**
 
 ```bash
-npm install zod stripe @supabase/supabase-js
-npm install -D vitest jsdom @testing-library/react @testing-library/jest-dom
+pnpm add zod stripe @supabase/supabase-js
+pnpm add -D vitest jsdom @testing-library/react @testing-library/jest-dom
 ```
 
 **Step 2: Commit**
@@ -82,7 +82,7 @@ describe("validateEnv", () => {
 
 **Step 2: Run test to verify it fails**
 
-Run: `npx vitest run src/lib/env.test.ts`
+Run: `pnpm vitest run src/lib/env.test.ts`
 Expected: FAIL with module not found for `./env`.
 
 **Step 3: Write minimal implementation**
@@ -190,7 +190,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
 **Step 4: Run test to verify it passes**
 
-Run: `npm run test:run -- src/lib/env.test.ts`
+Run: `pnpm test:run -- src/lib/env.test.ts`
 Expected: PASS
 
 **Step 5: Commit**
@@ -235,7 +235,7 @@ describe("auth helpers", () => {
 
 **Step 2: Run test to verify it fails**
 
-Run: `npm run test:run -- src/lib/auth.test.ts`
+Run: `pnpm test:run -- src/lib/auth.test.ts`
 Expected: FAIL with module not found for `./auth`.
 
 **Step 3: Write minimal implementation**
@@ -286,7 +286,7 @@ export function createBrowserSupabase() {
 
 **Step 4: Run test to verify it passes**
 
-Run: `npm run test:run -- src/lib/auth.test.ts`
+Run: `pnpm test:run -- src/lib/auth.test.ts`
 Expected: PASS
 
 **Step 5: Commit**
@@ -325,7 +325,7 @@ describe("supabase schema", () => {
 
 **Step 2: Run test to verify it fails**
 
-Run: `npm run test:run -- supabase/schema.test.ts`
+Run: `pnpm test:run -- supabase/schema.test.ts`
 Expected: FAIL with ENOENT for `supabase/schema.sql`.
 
 **Step 3: Write minimal implementation**
@@ -420,7 +420,7 @@ create table if not exists moderation_blocks (
 
 **Step 4: Run test to verify it passes**
 
-Run: `npm run test:run -- supabase/schema.test.ts`
+Run: `pnpm test:run -- supabase/schema.test.ts`
 Expected: PASS
 
 **Step 5: Commit**
@@ -461,7 +461,7 @@ describe("SiteHeader", () => {
 
 **Step 2: Run test to verify it fails**
 
-Run: `npm run test:run -- src/components/SiteHeader.test.tsx`
+Run: `pnpm test:run -- src/components/SiteHeader.test.tsx`
 Expected: FAIL with module not found for `./SiteHeader`.
 
 **Step 3: Write minimal implementation**
@@ -573,7 +573,7 @@ h1, h2, h3 {
 
 **Step 4: Run test to verify it passes**
 
-Run: `npm run test:run -- src/components/SiteHeader.test.tsx`
+Run: `pnpm test:run -- src/components/SiteHeader.test.tsx`
 Expected: PASS
 
 **Step 5: Commit**
@@ -612,7 +612,7 @@ describe("boardPostSchema", () => {
 
 **Step 2: Run test to verify it fails**
 
-Run: `npm run test:run -- src/lib/validation/board.test.ts`
+Run: `pnpm test:run -- src/lib/validation/board.test.ts`
 Expected: FAIL with module not found for `./board`.
 
 **Step 3: Write minimal implementation**
@@ -670,7 +670,7 @@ export const reportSchema = z.object({
 
 **Step 4: Run test to verify it passes**
 
-Run: `npm run test:run -- src/lib/validation/board.test.ts`
+Run: `pnpm test:run -- src/lib/validation/board.test.ts`
 Expected: PASS
 
 **Step 5: Commit**
@@ -707,7 +707,7 @@ describe("Landing page", () => {
 
 **Step 2: Run test to verify it fails**
 
-Run: `npm run test:run -- src/app/page.test.tsx`
+Run: `pnpm test:run -- src/app/page.test.tsx`
 Expected: FAIL with missing text.
 
 **Step 3: Write minimal implementation**
@@ -738,7 +738,7 @@ export default function Page() {
 
 **Step 4: Run test to verify it passes**
 
-Run: `npm run test:run -- src/app/page.test.tsx`
+Run: `pnpm test:run -- src/app/page.test.tsx`
 Expected: PASS
 
 **Step 5: Commit**
@@ -775,7 +775,7 @@ describe("formatBoardStatus", () => {
 
 **Step 2: Run test to verify it fails**
 
-Run: `npm run test:run -- src/lib/board.test.ts`
+Run: `pnpm test:run -- src/lib/board.test.ts`
 Expected: FAIL with module not found for `./board`.
 
 **Step 3: Write minimal implementation**
@@ -842,7 +842,7 @@ export default function BoardDetailPage() {
 
 **Step 4: Run test to verify it passes**
 
-Run: `npm run test:run -- src/lib/board.test.ts`
+Run: `pnpm test:run -- src/lib/board.test.ts`
 Expected: PASS
 
 **Step 5: Commit**
@@ -879,7 +879,7 @@ describe("DM page", () => {
 
 **Step 2: Run test to verify it fails**
 
-Run: `npm run test:run -- src/app/dm/page.test.tsx`
+Run: `pnpm test:run -- src/app/dm/page.test.tsx`
 Expected: FAIL with missing text.
 
 **Step 3: Write minimal implementation**
@@ -900,7 +900,7 @@ export default function DMPage() {
 
 **Step 4: Run test to verify it passes**
 
-Run: `npm run test:run -- src/app/dm/page.test.tsx`
+Run: `pnpm test:run -- src/app/dm/page.test.tsx`
 Expected: PASS
 
 **Step 5: Commit**
@@ -937,7 +937,7 @@ describe("Gallery page", () => {
 
 **Step 2: Run test to verify it fails**
 
-Run: `npm run test:run -- src/app/gallery/page.test.tsx`
+Run: `pnpm test:run -- src/app/gallery/page.test.tsx`
 Expected: FAIL with missing heading.
 
 **Step 3: Write minimal implementation**
@@ -956,7 +956,7 @@ export default function GalleryPage() {
 
 **Step 4: Run test to verify it passes**
 
-Run: `npm run test:run -- src/app/gallery/page.test.tsx`
+Run: `pnpm test:run -- src/app/gallery/page.test.tsx`
 Expected: PASS
 
 **Step 5: Commit**
@@ -993,7 +993,7 @@ describe("Profile page", () => {
 
 **Step 2: Run test to verify it fails**
 
-Run: `npm run test:run -- src/app/profile/page.test.tsx`
+Run: `pnpm test:run -- src/app/profile/page.test.tsx`
 Expected: FAIL with missing heading.
 
 **Step 3: Write minimal implementation**
@@ -1014,7 +1014,7 @@ export default function ProfilePage() {
 
 **Step 4: Run test to verify it passes**
 
-Run: `npm run test:run -- src/app/profile/page.test.tsx`
+Run: `pnpm test:run -- src/app/profile/page.test.tsx`
 Expected: PASS
 
 **Step 5: Commit**
@@ -1050,7 +1050,7 @@ describe("tip presets", () => {
 
 **Step 2: Run test to verify it fails**
 
-Run: `npm run test:run -- src/lib/stripe.test.ts`
+Run: `pnpm test:run -- src/lib/stripe.test.ts`
 Expected: FAIL with module not found for `./stripe`.
 
 **Step 3: Write minimal implementation**
@@ -1092,7 +1092,7 @@ export async function POST(req: Request) {
 
 **Step 4: Run test to verify it passes**
 
-Run: `npm run test:run -- src/lib/stripe.test.ts`
+Run: `pnpm test:run -- src/lib/stripe.test.ts`
 Expected: PASS
 
 **Step 5: Commit**
@@ -1129,7 +1129,7 @@ describe("vercel config", () => {
 
 **Step 2: Run test to verify it fails**
 
-Run: `npm run test:run -- src/lib/vercel.test.ts`
+Run: `pnpm test:run -- src/lib/vercel.test.ts`
 Expected: FAIL with ENOENT for `vercel.json`.
 
 **Step 3: Write minimal implementation**
@@ -1147,7 +1147,7 @@ Expected: FAIL with ENOENT for `vercel.json`.
 
 **Step 4: Run test to verify it passes**
 
-Run: `npm run test:run -- src/lib/vercel.test.ts`
+Run: `pnpm test:run -- src/lib/vercel.test.ts`
 Expected: PASS
 
 **Step 5: Commit**
@@ -1171,9 +1171,9 @@ git commit -m "chore: set vercel function region"
 
 ## Test Commands Summary
 
-- `npm run test:run`
-- `npm run lint`
-- `npm run build`
+- `pnpm test:run`
+- `pnpm lint`
+- `pnpm build`
 
 ---
 

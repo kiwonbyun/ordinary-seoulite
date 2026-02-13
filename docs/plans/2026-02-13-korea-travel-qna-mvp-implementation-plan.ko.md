@@ -23,8 +23,8 @@
 **Step 1: 필요한 패키지 설치**
 
 ```bash
-npm install zod stripe @supabase/supabase-js
-npm install -D vitest jsdom @testing-library/react @testing-library/jest-dom
+pnpm add zod stripe @supabase/supabase-js
+pnpm add -D vitest jsdom @testing-library/react @testing-library/jest-dom
 ```
 
 **Step 2: 커밋**
@@ -82,7 +82,7 @@ describe("validateEnv", () => {
 
 **Step 2: 테스트 실행(실패 확인)**
 
-실행: `npx vitest run src/lib/env.test.ts`
+실행: `pnpm vitest run src/lib/env.test.ts`
 기대 결과: `./env` 모듈을 찾지 못해 FAIL.
 
 **Step 3: 최소 구현 작성**
@@ -190,7 +190,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
 **Step 4: 테스트 실행(통과 확인)**
 
-실행: `npm run test:run -- src/lib/env.test.ts`
+실행: `pnpm test:run -- src/lib/env.test.ts`
 기대 결과: PASS
 
 **Step 5: 커밋**
@@ -235,7 +235,7 @@ describe("auth helpers", () => {
 
 **Step 2: 테스트 실행(실패 확인)**
 
-실행: `npm run test:run -- src/lib/auth.test.ts`
+실행: `pnpm test:run -- src/lib/auth.test.ts`
 기대 결과: `./auth` 모듈을 찾지 못해 FAIL.
 
 **Step 3: 최소 구현 작성**
@@ -286,7 +286,7 @@ export function createBrowserSupabase() {
 
 **Step 4: 테스트 실행(통과 확인)**
 
-실행: `npm run test:run -- src/lib/auth.test.ts`
+실행: `pnpm test:run -- src/lib/auth.test.ts`
 기대 결과: PASS
 
 **Step 5: 커밋**
@@ -325,7 +325,7 @@ describe("supabase schema", () => {
 
 **Step 2: 테스트 실행(실패 확인)**
 
-실행: `npm run test:run -- supabase/schema.test.ts`
+실행: `pnpm test:run -- supabase/schema.test.ts`
 기대 결과: `supabase/schema.sql` ENOENT로 FAIL.
 
 **Step 3: 최소 구현 작성**
@@ -420,7 +420,7 @@ create table if not exists moderation_blocks (
 
 **Step 4: 테스트 실행(통과 확인)**
 
-실행: `npm run test:run -- supabase/schema.test.ts`
+실행: `pnpm test:run -- supabase/schema.test.ts`
 기대 결과: PASS
 
 **Step 5: 커밋**
@@ -461,7 +461,7 @@ describe("SiteHeader", () => {
 
 **Step 2: 테스트 실행(실패 확인)**
 
-실행: `npm run test:run -- src/components/SiteHeader.test.tsx`
+실행: `pnpm test:run -- src/components/SiteHeader.test.tsx`
 기대 결과: `./SiteHeader` 모듈을 찾지 못해 FAIL.
 
 **Step 3: 최소 구현 작성**
@@ -573,7 +573,7 @@ h1, h2, h3 {
 
 **Step 4: 테스트 실행(통과 확인)**
 
-실행: `npm run test:run -- src/components/SiteHeader.test.tsx`
+실행: `pnpm test:run -- src/components/SiteHeader.test.tsx`
 기대 결과: PASS
 
 **Step 5: 커밋**
@@ -612,7 +612,7 @@ describe("boardPostSchema", () => {
 
 **Step 2: 테스트 실행(실패 확인)**
 
-실행: `npm run test:run -- src/lib/validation/board.test.ts`
+실행: `pnpm test:run -- src/lib/validation/board.test.ts`
 기대 결과: `./board` 모듈을 찾지 못해 FAIL.
 
 **Step 3: 최소 구현 작성**
@@ -670,7 +670,7 @@ export const reportSchema = z.object({
 
 **Step 4: 테스트 실행(통과 확인)**
 
-실행: `npm run test:run -- src/lib/validation/board.test.ts`
+실행: `pnpm test:run -- src/lib/validation/board.test.ts`
 기대 결과: PASS
 
 **Step 5: 커밋**
@@ -707,7 +707,7 @@ describe("Landing page", () => {
 
 **Step 2: 테스트 실행(실패 확인)**
 
-실행: `npm run test:run -- src/app/page.test.tsx`
+실행: `pnpm test:run -- src/app/page.test.tsx`
 기대 결과: 텍스트 누락으로 FAIL.
 
 **Step 3: 최소 구현 작성**
@@ -738,7 +738,7 @@ export default function Page() {
 
 **Step 4: 테스트 실행(통과 확인)**
 
-실행: `npm run test:run -- src/app/page.test.tsx`
+실행: `pnpm test:run -- src/app/page.test.tsx`
 기대 결과: PASS
 
 **Step 5: 커밋**
@@ -775,7 +775,7 @@ describe("formatBoardStatus", () => {
 
 **Step 2: 테스트 실행(실패 확인)**
 
-실행: `npm run test:run -- src/lib/board.test.ts`
+실행: `pnpm test:run -- src/lib/board.test.ts`
 기대 결과: `./board` 모듈을 찾지 못해 FAIL.
 
 **Step 3: 최소 구현 작성**
@@ -842,7 +842,7 @@ export default function BoardDetailPage() {
 
 **Step 4: 테스트 실행(통과 확인)**
 
-실행: `npm run test:run -- src/lib/board.test.ts`
+실행: `pnpm test:run -- src/lib/board.test.ts`
 기대 결과: PASS
 
 **Step 5: 커밋**
@@ -879,7 +879,7 @@ describe("DM page", () => {
 
 **Step 2: 테스트 실행(실패 확인)**
 
-실행: `npm run test:run -- src/app/dm/page.test.tsx`
+실행: `pnpm test:run -- src/app/dm/page.test.tsx`
 기대 결과: 텍스트 누락으로 FAIL.
 
 **Step 3: 최소 구현 작성**
@@ -900,7 +900,7 @@ export default function DMPage() {
 
 **Step 4: 테스트 실행(통과 확인)**
 
-실행: `npm run test:run -- src/app/dm/page.test.tsx`
+실행: `pnpm test:run -- src/app/dm/page.test.tsx`
 기대 결과: PASS
 
 **Step 5: 커밋**
@@ -937,7 +937,7 @@ describe("Gallery page", () => {
 
 **Step 2: 테스트 실행(실패 확인)**
 
-실행: `npm run test:run -- src/app/gallery/page.test.tsx`
+실행: `pnpm test:run -- src/app/gallery/page.test.tsx`
 기대 결과: 제목 누락으로 FAIL.
 
 **Step 3: 최소 구현 작성**
@@ -956,7 +956,7 @@ export default function GalleryPage() {
 
 **Step 4: 테스트 실행(통과 확인)**
 
-실행: `npm run test:run -- src/app/gallery/page.test.tsx`
+실행: `pnpm test:run -- src/app/gallery/page.test.tsx`
 기대 결과: PASS
 
 **Step 5: 커밋**
@@ -993,7 +993,7 @@ describe("Profile page", () => {
 
 **Step 2: 테스트 실행(실패 확인)**
 
-실행: `npm run test:run -- src/app/profile/page.test.tsx`
+실행: `pnpm test:run -- src/app/profile/page.test.tsx`
 기대 결과: 제목 누락으로 FAIL.
 
 **Step 3: 최소 구현 작성**
@@ -1014,7 +1014,7 @@ export default function ProfilePage() {
 
 **Step 4: 테스트 실행(통과 확인)**
 
-실행: `npm run test:run -- src/app/profile/page.test.tsx`
+실행: `pnpm test:run -- src/app/profile/page.test.tsx`
 기대 결과: PASS
 
 **Step 5: 커밋**
@@ -1050,7 +1050,7 @@ describe("tip presets", () => {
 
 **Step 2: 테스트 실행(실패 확인)**
 
-실행: `npm run test:run -- src/lib/stripe.test.ts`
+실행: `pnpm test:run -- src/lib/stripe.test.ts`
 기대 결과: `./stripe` 모듈을 찾지 못해 FAIL.
 
 **Step 3: 최소 구현 작성**
@@ -1092,7 +1092,7 @@ export async function POST(req: Request) {
 
 **Step 4: 테스트 실행(통과 확인)**
 
-실행: `npm run test:run -- src/lib/stripe.test.ts`
+실행: `pnpm test:run -- src/lib/stripe.test.ts`
 기대 결과: PASS
 
 **Step 5: 커밋**
@@ -1129,7 +1129,7 @@ describe("vercel config", () => {
 
 **Step 2: 테스트 실행(실패 확인)**
 
-실행: `npm run test:run -- src/lib/vercel.test.ts`
+실행: `pnpm test:run -- src/lib/vercel.test.ts`
 기대 결과: `vercel.json` ENOENT로 FAIL.
 
 **Step 3: 최소 구현 작성**
@@ -1147,7 +1147,7 @@ describe("vercel config", () => {
 
 **Step 4: 테스트 실행(통과 확인)**
 
-실행: `npm run test:run -- src/lib/vercel.test.ts`
+실행: `pnpm test:run -- src/lib/vercel.test.ts`
 기대 결과: PASS
 
 **Step 5: 커밋**
@@ -1171,9 +1171,9 @@ git commit -m "chore: set vercel function region"
 
 ## 테스트 명령 요약
 
-- `npm run test:run`
-- `npm run lint`
-- `npm run build`
+- `pnpm test:run`
+- `pnpm lint`
+- `pnpm build`
 
 ---
 
