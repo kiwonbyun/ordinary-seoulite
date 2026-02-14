@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Design System
+
+The UI uses a Seoul sunset theme token system defined in `src/app/globals.css`.
+The landing page uses the strongest hero treatment, while interior pages use lower-intensity themed surfaces.
+Reusable UI primitives now use `shadcn/ui` (Radix-based) under `src/components/ui`.
+
 ## Getting Started
 
 First, run the development server:

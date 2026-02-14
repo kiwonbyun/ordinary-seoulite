@@ -9,4 +9,9 @@ describe("supabase schema", () => {
     expect(schema).toMatch(/create table if not exists dm_threads/i);
     expect(schema).toMatch(/create table if not exists gallery_photos/i);
   });
+
+  it("stores board post type with question as default", () => {
+    expect(schema).toMatch(/type text not null default 'question'/i);
+    expect(schema).toMatch(/check \(type in \('question', 'review', 'tip'\)\)/i);
+  });
 });

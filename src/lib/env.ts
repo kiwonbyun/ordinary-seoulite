@@ -2,23 +2,28 @@ export type RawEnv = Record<string, string | undefined>;
 
 type ServerEnv = {
   supabaseUrl: string;
-  supabaseAnonKey: string;
-  supabaseServiceRoleKey: string;
+  supabasePublishableKey: string;
+  supabaseSecretKey: string;
   stripeSecretKey: string;
   stripeWebhookSecret: string;
   siteUrl: string;
 };
 
+type SupabaseServerEnv = {
+  supabaseUrl: string;
+  supabaseSecretKey: string;
+};
+
 type PublicEnv = {
   supabaseUrl: string;
-  supabaseAnonKey: string;
+  supabasePublishableKey: string;
   siteUrl: string;
 };
 
 const serverRequired = [
   "NEXT_PUBLIC_SUPABASE_URL",
-  "NEXT_PUBLIC_SUPABASE_ANON_KEY",
-  "SUPABASE_SERVICE_ROLE_KEY",
+  "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
+  "SUPABASE_SECRET_KEY",
   "STRIPE_SECRET_KEY",
   "STRIPE_WEBHOOK_SECRET",
   "NEXT_PUBLIC_SITE_URL",
@@ -26,8 +31,13 @@ const serverRequired = [
 
 const publicRequired = [
   "NEXT_PUBLIC_SUPABASE_URL",
-  "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+  "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
   "NEXT_PUBLIC_SITE_URL",
+] as const;
+
+const supabaseServerRequired = [
+  "NEXT_PUBLIC_SUPABASE_URL",
+  "SUPABASE_SECRET_KEY",
 ] as const;
 
 export function validateServerEnv(raw: RawEnv): ServerEnv {
@@ -38,8 +48,8 @@ export function validateServerEnv(raw: RawEnv): ServerEnv {
   }
   return {
     supabaseUrl: raw.NEXT_PUBLIC_SUPABASE_URL!,
-    supabaseAnonKey: raw.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    supabaseServiceRoleKey: raw.SUPABASE_SERVICE_ROLE_KEY!,
+    supabasePublishableKey: raw.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    supabaseSecretKey: raw.SUPABASE_SECRET_KEY!,
     stripeSecretKey: raw.STRIPE_SECRET_KEY!,
     stripeWebhookSecret: raw.STRIPE_WEBHOOK_SECRET!,
     siteUrl: raw.NEXT_PUBLIC_SITE_URL!,
@@ -54,7 +64,20 @@ export function validatePublicEnv(raw: RawEnv): PublicEnv {
   }
   return {
     supabaseUrl: raw.NEXT_PUBLIC_SUPABASE_URL!,
-    supabaseAnonKey: raw.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabasePublishableKey: raw.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
     siteUrl: raw.NEXT_PUBLIC_SITE_URL!,
+  };
+}
+
+export function validateSupabaseServerEnv(raw: RawEnv): SupabaseServerEnv {
+  for (const key of supabaseServerRequired) {
+    if (!raw[key]) {
+      throw new Error(`Missing env: ${key}`);
+    }
+  }
+
+  return {
+    supabaseUrl: raw.NEXT_PUBLIC_SUPABASE_URL!,
+    supabaseSecretKey: raw.SUPABASE_SECRET_KEY!,
   };
 }

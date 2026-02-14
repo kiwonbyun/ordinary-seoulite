@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { type ReactNode } from "react";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 type ButtonProps = {
   href: string;
@@ -8,13 +10,11 @@ type ButtonProps = {
 };
 
 export default function Button({ href, children, variant = "primary" }: ButtonProps) {
-  const base = "inline-flex items-center justify-center rounded-full px-4 py-2 text-sm";
-  const styles =
-    variant === "primary"
-      ? "bg-black text-white hover:bg-neutral-800"
-      : "border border-neutral-300 text-neutral-800 hover:border-neutral-500";
+  const uiVariant = variant === "primary" ? "default" : "ghost";
+  const legacyClass = variant === "primary" ? "btn-primary" : "btn-ghost";
+
   return (
-    <Link className={`${base} ${styles}`} href={href}>
+    <Link className={cn(buttonVariants({ variant: uiVariant }), legacyClass)} href={href}>
       {children}
     </Link>
   );
