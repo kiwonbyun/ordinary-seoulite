@@ -1,11 +1,6 @@
 import { NextResponse } from "next/server";
 import { resolveRedirectTarget } from "@/lib/auth-redirect";
 import { validatePublicEnv } from "@/lib/env";
-import {
-  createOAuthState,
-  OAUTH_STATE_COOKIE,
-  OAUTH_STATE_MAX_AGE_SECONDS,
-} from "@/lib/oauth-state";
 
 export async function GET(req: Request) {
   const env = validatePublicEnv(process.env);
@@ -18,17 +13,6 @@ export async function GET(req: Request) {
   authorizeUrl.searchParams.set("provider", "google");
   authorizeUrl.searchParams.set("redirect_to", callbackUrl.toString());
   authorizeUrl.searchParams.set("response_type", "code");
-  const state = createOAuthState();
-  authorizeUrl.searchParams.set("state", state);
 
-  const response = NextResponse.redirect(authorizeUrl);
-  response.cookies.set(OAUTH_STATE_COOKIE, state, {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: env.siteUrl.startsWith("https://"),
-    path: "/",
-    maxAge: OAUTH_STATE_MAX_AGE_SECONDS,
-  });
-
-  return response;
+  return NextResponse.redirect(authorizeUrl);
 }

@@ -13,7 +13,7 @@ describe("auth start route", () => {
     };
   });
 
-  it("redirects to provider authorize URL with code response type and state", async () => {
+  it("redirects to provider authorize URL with code response type", async () => {
     const req = new Request("http://localhost:3000/auth/start?redirectTo=/board/new");
 
     const response = await GET(req);
@@ -23,16 +23,9 @@ describe("auth start route", () => {
     expect(authorizeUrl.pathname).toBe("/auth/v1/authorize");
     expect(authorizeUrl.searchParams.get("provider")).toBe("google");
     expect(authorizeUrl.searchParams.get("response_type")).toBe("code");
-    expect(authorizeUrl.searchParams.get("state")).toBeTruthy();
-  });
 
-  it("sets oauth state cookie", async () => {
-    const req = new Request("http://localhost:3000/auth/start?redirectTo=/board/new");
-
-    const response = await GET(req);
-    const cookie = response.cookies.get("os-oauth-state");
-
-    expect(cookie?.value).toBeTruthy();
-    expect(cookie?.name).toBe("os-oauth-state");
+    const callbackUrl = new URL(authorizeUrl.searchParams.get("redirect_to") ?? "");
+    expect(callbackUrl.pathname).toBe("/auth/callback");
+    expect(callbackUrl.searchParams.get("redirectTo")).toBe("/board/new");
   });
 });

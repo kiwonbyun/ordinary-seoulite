@@ -37,24 +37,8 @@ describe("callback route", () => {
     exchangeCodeForSession.mockReset();
   });
 
-  it("redirects to login when state is missing or mismatched", async () => {
-    const req = new Request(
-      "http://localhost:3000/auth/callback?code=abc&state=wrong&redirectTo=/board/new",
-      { headers: { cookie: "os-oauth-state=expected" } },
-    );
-
-    const response = await GET(req);
-
-    expect(response.headers.get("location")).toBe(
-      "http://localhost:3000/login?redirectTo=%2Fboard%2Fnew",
-    );
-    expect(exchangeCodeForSession).not.toHaveBeenCalled();
-  });
-
   it("redirects to login when code is missing", async () => {
-    const req = new Request("http://localhost:3000/auth/callback?state=expected&redirectTo=/board/new", {
-      headers: { cookie: "os-oauth-state=expected" },
-    });
+    const req = new Request("http://localhost:3000/auth/callback?redirectTo=/board/new");
 
     const response = await GET(req);
 
@@ -64,7 +48,7 @@ describe("callback route", () => {
     expect(exchangeCodeForSession).not.toHaveBeenCalled();
   });
 
-  it("sets auth cookies and redirects when state and code are valid", async () => {
+  it("sets auth cookies and redirects when code is valid", async () => {
     exchangeCodeForSession.mockResolvedValue({
       data: {
         session: {
@@ -76,20 +60,15 @@ describe("callback route", () => {
       error: null,
     });
 
-    const req = new Request(
-      "http://localhost:3000/auth/callback?code=abc&state=expected&redirectTo=/board/new",
-      { headers: { cookie: "os-oauth-state=expected" } },
-    );
+    const req = new Request("http://localhost:3000/auth/callback?code=abc&redirectTo=/board/new");
 
     const response = await GET(req);
     const accessCookie = response.cookies.get("os-access-token");
     const refreshCookie = response.cookies.get("os-refresh-token");
-    const stateCookie = response.cookies.get("os-oauth-state");
 
     expect(response.headers.get("location")).toBe("http://localhost:3000/board/new");
     expect(exchangeCodeForSession).toHaveBeenCalledWith("abc");
     expect(accessCookie?.value).toBe("access-token");
     expect(refreshCookie?.value).toBe("refresh-token");
-    expect(stateCookie?.value).toBe("");
   });
 });
