@@ -23,9 +23,14 @@ describe("auth start route", () => {
     expect(authorizeUrl.pathname).toBe("/auth/v1/authorize");
     expect(authorizeUrl.searchParams.get("provider")).toBe("google");
     expect(authorizeUrl.searchParams.get("response_type")).toBe("code");
+    expect(authorizeUrl.searchParams.get("code_challenge_method")).toBe("s256");
+    expect(authorizeUrl.searchParams.get("code_challenge")).toBeTruthy();
 
     const callbackUrl = new URL(authorizeUrl.searchParams.get("redirect_to") ?? "");
     expect(callbackUrl.pathname).toBe("/auth/callback");
     expect(callbackUrl.searchParams.get("redirectTo")).toBe("/board/new");
+
+    const pkceCookie = response.cookies.get("os-pkce-code-verifier");
+    expect(pkceCookie?.value).toBeTruthy();
   });
 });

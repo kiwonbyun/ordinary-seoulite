@@ -1,5 +1,15 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+const { fetchBoardPostsPage } = vi.hoisted(() => ({
+  fetchBoardPostsPage: vi.fn(),
+}));
+
+vi.mock("@/lib/board-posts", () => ({
+  BOARD_PAGE_SIZE: 20,
+  fetchBoardPostsPage,
+}));
+
 import Page from "./page";
 
 async function renderPage(searchParams?: { created?: string }) {
@@ -10,6 +20,14 @@ async function renderPage(searchParams?: { created?: string }) {
 }
 
 describe("Board page", () => {
+  beforeEach(() => {
+    fetchBoardPostsPage.mockResolvedValue({
+      posts: [],
+      hasMore: false,
+      nextOffset: 0,
+    });
+  });
+
   it("shows an empty-state prompt when there are no posts", async () => {
     await renderPage();
     expect(screen.getByText(/your story can be the first one/i)).toBeInTheDocument();
