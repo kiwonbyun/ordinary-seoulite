@@ -1,0 +1,1 @@
+select to_regclass('public.board_posts');

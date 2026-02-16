@@ -18,6 +18,14 @@ create table if not exists board_posts (
   created_at timestamptz not null default now()
 );
 
+create table if not exists board_post_images (
+  id uuid primary key default gen_random_uuid(),
+  post_id uuid not null references board_posts(id) on delete cascade,
+  image_url text not null,
+  position integer not null default 0,
+  created_at timestamptz not null default now()
+);
+
 create table if not exists dm_threads (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references users(id),
@@ -52,3 +60,7 @@ create table if not exists tips (
   status text not null default 'pending' check (status in ('pending', 'paid', 'failed')),
   created_at timestamptz not null default now()
 );
+
+insert into storage.buckets (id, name, public)
+values ('board-post-images', 'board-post-images', true)
+on conflict (id) do nothing;

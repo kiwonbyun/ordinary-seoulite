@@ -6,6 +6,7 @@ import {
   createRoute,
   createRouter,
 } from "@tanstack/react-router";
+import { Suspense, lazy } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -24,6 +25,19 @@ import { BoardDetailRoute } from "./routes/board-detail";
 import { DMRoute } from "./routes/dm";
 import { GalleryRoute } from "./routes/gallery";
 import { LoginRoute } from "./routes/login";
+
+const LazyBoardNewRoute = lazy(async () => {
+  const module = await import("./routes/board-new");
+  return { default: module.BoardNewRoute };
+});
+
+function BoardNewRouteLazy() {
+  return (
+    <Suspense fallback={<section className="py-6 text-sm text-muted-foreground">Loading editor...</section>}>
+      <LazyBoardNewRoute />
+    </Suspense>
+  );
+}
 
 function RootLayout() {
   const { user, loading } = useAuthSession();
@@ -128,19 +142,6 @@ const homeRoute = createRoute({
 const boardRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/board",
-  validateSearch: (search: Record<string, unknown>) => {
-    const result: { q?: string; type?: "all" | "question" | "review" | "tip" } = {};
-    if (typeof search.q === "string" && search.q.trim()) {
-      result.q = search.q;
-    }
-    if (
-      typeof search.type === "string" &&
-      (search.type === "all" || search.type === "question" || search.type === "review" || search.type === "tip")
-    ) {
-      result.type = search.type;
-    }
-    return result;
-  },
   component: BoardRoute,
 });
 
@@ -148,6 +149,12 @@ const boardDetailRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/board/$postId",
   component: BoardDetailRoute,
+});
+
+const boardNewRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/board/new",
+  component: BoardNewRouteLazy,
 });
 
 const dmRoute = createRoute({
@@ -175,7 +182,15 @@ const loginRoute = createRoute({
   component: LoginRoute,
 });
 
-const routeTree = rootRoute.addChildren([homeRoute, boardRoute, boardDetailRoute, dmRoute, galleryRoute, loginRoute]);
+const routeTree = rootRoute.addChildren([
+  homeRoute,
+  boardRoute,
+  boardNewRoute,
+  boardDetailRoute,
+  dmRoute,
+  galleryRoute,
+  loginRoute,
+]);
 
 const router = createRouter({ routeTree });
 

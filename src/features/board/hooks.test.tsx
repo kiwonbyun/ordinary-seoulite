@@ -12,7 +12,7 @@ describe("useCreateBoardPost", () => {
   });
 
   it("rolls back optimistic cache when mutation fails", async () => {
-    vi.spyOn(api, "createBoardPost").mockRejectedValueOnce(new Error("insert failed"));
+    vi.spyOn(api, "createBoardPostWithImages").mockRejectedValueOnce(new Error("insert failed"));
 
     const filters = { type: "all" as const };
     const key = boardQueryKey(filters);
@@ -27,6 +27,9 @@ describe("useCreateBoardPost", () => {
         status: "open",
         createdAt: "2026-02-15T00:00:00.000Z",
         authorId: "u1",
+        authorDisplayName: "User",
+        thumbnailUrl: "https://cdn/default.jpg",
+        images: [],
       },
     ];
     queryClient.setQueryData(key, existing);

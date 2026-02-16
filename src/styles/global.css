@@ -21,7 +21,7 @@
   --border: oklch(0.9 0.006 286.3);
   --input: oklch(0.9 0.006 286.3);
   --ring: oklch(0.68 0.04 264.8);
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 }
 
 @theme inline {
@@ -65,4 +65,19 @@ body {
 
 .content-measure {
   max-width: 68ch;
+}
+
+.board-editor .ql-container {
+  background: #fff;
+  border-radius: 0 0 0.125rem 0.125rem;
+}
+
+.board-editor .ql-editor {
+  background: #fff;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+.board-editor .ql-toolbar.ql-snow {
+  border-radius: 0.125rem 0.125rem 0 0;
 }

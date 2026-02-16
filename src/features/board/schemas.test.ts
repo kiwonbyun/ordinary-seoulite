@@ -22,5 +22,14 @@ describe("boardPostSchema", () => {
 
     expect(result.success).toBe(true);
   });
-});
 
+  it("rejects short body", () => {
+    const result = boardPostSchema.safeParse({
+      type: "tip",
+      title: "Valid title",
+      body: "short",
+    });
+
+    expect(result.success).toBe(false);
+  });
+});

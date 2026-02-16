@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createBoardPost, fetchBoardPostById, fetchBoardPosts } from "./api";
+import fallbackThumbnail from "@/app/assets/main.jpg";
+import { createBoardPostWithImages, fetchBoardPostById, fetchBoardPosts } from "./api";
 import type { BoardPost, BoardPostFilters, CreateBoardPostInput } from "./types";
 
 export const boardQueryKey = (filters?: BoardPostFilters) => ["board-posts", filters ?? {}] as const;
@@ -24,7 +25,7 @@ export function useCreateBoardPost(filters?: BoardPostFilters) {
   const key = boardQueryKey(filters);
 
   return useMutation({
-    mutationFn: (input: CreateBoardPostInput) => createBoardPost(input),
+    mutationFn: (input: CreateBoardPostInput) => createBoardPostWithImages(input),
     onMutate: async (input) => {
       await queryClient.cancelQueries({ queryKey: key });
       const previous = queryClient.getQueryData<BoardPost[]>(key) ?? [];
@@ -37,6 +38,9 @@ export function useCreateBoardPost(filters?: BoardPostFilters) {
         status: "open",
         createdAt: new Date().toISOString(),
         authorId: "me",
+        authorDisplayName: null,
+        thumbnailUrl: fallbackThumbnail,
+        images: [],
       };
       queryClient.setQueryData<BoardPost[]>(key, [optimisticPost, ...previous]);
       return { previous };
