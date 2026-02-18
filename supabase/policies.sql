@@ -128,7 +128,7 @@ create policy "public can read gallery"
 create policy "admin can write gallery"
   on gallery_items for insert
   to authenticated
-  with check ((auth.jwt() ->> 'role') = 'admin');
+  with check ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin' and created_by = auth.uid());
 
 create policy "owner can create tips"
   on tips for insert
@@ -149,3 +149,13 @@ create policy "authenticated can upload board post image objects"
   on storage.objects for insert
   to authenticated
   with check (bucket_id = 'board-post-images');
+
+create policy "public can read gallery image objects"
+  on storage.objects for select
+  to public
+  using (bucket_id = 'gallery-images');
+
+create policy "admin can upload gallery image objects"
+  on storage.objects for insert
+  to authenticated
+  with check (bucket_id = 'gallery-images' and (auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');

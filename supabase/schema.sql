@@ -64,3 +64,7 @@ create table if not exists tips (
 insert into storage.buckets (id, name, public)
 values ('board-post-images', 'board-post-images', true)
 on conflict (id) do nothing;
+
+insert into storage.buckets (id, name, public)
+values ('gallery-images', 'gallery-images', true)
+on conflict (id) do nothing;

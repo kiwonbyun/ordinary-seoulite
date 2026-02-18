@@ -48,11 +48,13 @@ export function BoardRoute() {
       ) : null}
 
       {data.length > 0 ? (
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {data.map((post) => (
-            <article
+            <Link
               key={post.id}
-              className="overflow-hidden rounded-sm border bg-background"
+              to="/board/$postId"
+              params={{ postId: post.id }}
+              className="group block cursor-pointer overflow-hidden rounded-sm border bg-background transition-colors hover:border-foreground/70"
             >
               <div className="relative">
                 <img
@@ -68,20 +70,12 @@ export function BoardRoute() {
                     {post.type}
                   </p>
                 </div>
-                <h3 className="font-editorial text-2xl leading-tight">
-                  <Link
-                    to="/board/$postId"
-                    params={{ postId: post.id }}
-                    className="hover:underline"
-                  >
-                    {post.title}
-                  </Link>
-                </h3>
+                <h3 className="font-editorial text-2xl leading-tight group-hover:underline">{post.title}</h3>
                 <p className="text-xs text-muted-foreground">
                   By {formatAuthor(post)}
                 </p>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       ) : null}

@@ -24,7 +24,9 @@ import { BoardRoute } from "./routes/board";
 import { BoardDetailRoute } from "./routes/board-detail";
 import { DMRoute } from "./routes/dm";
 import { GalleryRoute } from "./routes/gallery";
+import { GalleryCreateRoute } from "./routes/gallery-create";
 import { LoginRoute } from "./routes/login";
+import { NotFoundRoute } from "./routes/not-found";
 
 const LazyBoardNewRoute = lazy(async () => {
   const module = await import("./routes/board-new");
@@ -131,6 +133,7 @@ function RootLayout() {
 
 const rootRoute = createRootRoute({
   component: RootLayout,
+  notFoundComponent: NotFoundRoute,
 });
 
 const homeRoute = createRoute({
@@ -169,6 +172,12 @@ const galleryRoute = createRoute({
   component: GalleryRoute,
 });
 
+const galleryCreateRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/gallery/create",
+  component: GalleryCreateRoute,
+});
+
 const loginRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/login",
@@ -189,6 +198,7 @@ const routeTree = rootRoute.addChildren([
   boardDetailRoute,
   dmRoute,
   galleryRoute,
+  galleryCreateRoute,
   loginRoute,
 ]);
 

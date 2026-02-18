@@ -5,3 +5,9 @@ export type GalleryItem = {
   locationTag: string | null;
   createdAt: string;
 };
+
+export type CreateGalleryItemInput = {
+  imageFile: File;
+  caption?: string;
+  locationTag?: string;
+};
